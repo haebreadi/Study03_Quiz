@@ -1,0 +1,96 @@
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --text: #1f2330;
+  --muted: #667085;
+  --accent: #4f46e5;
+  --good: #16a34a;
+  --bad: #dc2626;
+  --line: #e4e7ec;
+}
+
+body {
+  margin: 0;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.student-info {
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+  padding: 10px 16px;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.container { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+.title { text-align: center; margin: 8px 0 24px; }
+.lead { text-align: center; color: var(--muted); margin-bottom: 16px; }
+
+.screen { display: none; }
+.screen.active { display: block; }
+.hidden { display: none !important; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+
+.card {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: var(--card); border: 2px solid var(--line); border-radius: 14px;
+  padding: 20px 12px; cursor: pointer; font: inherit; color: inherit;
+  transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.card-icon { font-size: 2rem; }
+.card-name { font-weight: 700; font-size: 1.1rem; }
+.card-desc { font-size: .85rem; color: var(--muted); text-align: center; }
+
+.link-btn { display: block; margin: 20px auto 0; background: none; border: none; color: var(--accent); cursor: pointer; font: inherit; }
+
+.quiz-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--muted); flex-wrap: wrap; }
+.badge { background: var(--accent); color: #fff; border-radius: 999px; padding: 2px 12px; font-size: .85rem; }
+
+.timer-box { margin-bottom: 12px; }
+.timer-text { margin-bottom: 4px; }
+.timer-text strong { font-size: 1.3rem; color: var(--accent); }
+.timer-box.warn .timer-text strong { color: var(--bad); }
+.timer-bar { height: 8px; background: var(--line); border-radius: 4px; overflow: hidden; }
+.timer-fill { height: 100%; width: 100%; background: var(--accent); transition: width 1s linear; }
+.timer-box.warn .timer-fill { background: var(--bad); }
+
+.question { font-size: 1.3rem; margin: 8px 0 16px; }
+
+.choices { display: grid; gap: 10px; }
+.choice {
+  text-align: left; background: var(--card); border: 2px solid var(--line); border-radius: 12px;
+  padding: 14px 16px; font: inherit; color: inherit; cursor: pointer;
+}
+.choice:hover:not(:disabled) { border-color: var(--accent); }
+.choice:disabled { cursor: default; }
+.choice.correct { border-color: var(--good); background: #ecfdf3; }
+.choice.wrong { border-color: var(--bad); background: #fef3f2; }
+.choice.removed { visibility: hidden; }
+
+.hint-btn { margin-top: 12px; background: #fff7e6; border: 2px solid #f5b544; border-radius: 10px; padding: 10px 14px; font: inherit; cursor: pointer; }
+.hint-btn:disabled { opacity: .5; cursor: default; }
+
+.feedback { margin-top: 16px; padding: 12px 14px; border-radius: 10px; background: var(--card); border: 1px solid var(--line); }
+.feedback.good { border-color: var(--good); }
+.feedback.bad { border-color: var(--bad); }
+.feedback-title { font-weight: 700; margin-bottom: 4px; }
+
+.primary-btn, .secondary-btn { display: block; width: 100%; margin-top: 12px; padding: 14px; border-radius: 12px; font: inherit; font-weight: 700; cursor: pointer; }
+.primary-btn { background: var(--accent); color: #fff; border: none; }
+.secondary-btn { background: var(--card); color: var(--text); border: 2px solid var(--line); }
+
+.result-title { text-align: center; }
+.result-summary { text-align: center; font-size: 1.2rem; }
+.wrong-list { margin-top: 16px; }
+.wrong-item { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+.wrong-item .q { font-weight: 700; }
+.wrong-item .a { color: var(--muted); font-size: .9rem; }

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>퀴즈 게임</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="student-info" class="student-info">학번 2601993 이름 한예솔</div>
+
+  <main class="container">
+    <h1 class="title">퀴즈 게임</h1>
+
+    <!-- 1. 카테고리 선택 -->
+    <section id="screen-category" class="screen active">
+      <p class="lead">카테고리를 고르세요.</p>
+      <div id="category-list" class="grid"></div>
+    </section>
+
+    <!-- 2. 모드 선택 -->
+    <section id="screen-mode" class="screen">
+      <p class="lead"><span id="mode-category-name"></span> · 모드를 고르세요.</p>
+      <div class="grid mode-grid">
+        <button class="card mode-btn" data-mode="practice">
+          <span class="card-icon">📝</span>
+          <span class="card-name">연습</span>
+          <span class="card-desc">시간 제한 없이 풀고, 틀린 문제를 다시 풀 수 있어요.</span>
+        </button>
+        <button class="card mode-btn" data-mode="speed">
+          <span class="card-icon">⏱️</span>
+          <span class="card-name">스피드</span>
+          <span class="card-desc">문항마다 15초 안에 답하세요. 0초가 되면 시간 초과!</span>
+        </button>
+        <button class="card mode-btn" data-mode="hint">
+          <span class="card-icon">💡</span>
+          <span class="card-name">힌트</span>
+          <span class="card-desc">힌트를 누르면 오답 2개가 지워져요. 힌트를 쓰고 맞히면 0.5점.</span>
+        </button>
+      </div>
+      <button id="btn-back-category" class="link-btn">← 카테고리 다시 고르기</button>
+    </section>
+
+    <!-- 3. 문제 풀이 -->
+    <section id="screen-quiz" class="screen">
+      <div class="quiz-top">
+        <span id="quiz-mode-label" class="badge"></span>
+        <span id="quiz-progress"></span>
+        <span id="quiz-score"></span>
+      </div>
+      <div id="timer-box" class="timer-box hidden">
+        <div class="timer-text">남은 시간 <strong id="timer-value">15</strong>초</div>
+        <div class="timer-bar"><div id="timer-fill" class="timer-fill"></div></div>
+      </div>
+      <h2 id="question-text" class="question"></h2>
+      <div id="choice-list" class="choices"></div>
+      <button id="btn-hint" class="hint-btn hidden">💡 힌트 (오답 2개 지우기)</button>
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="btn-next" class="primary-btn hidden">다음 문제</button>
+    </section>
+
+    <!-- 4. 결과 -->
+    <section id="screen-result" class="screen">
+      <h2 class="result-title">결과</h2>
+      <p id="result-summary" class="result-summary"></p>
+      <div id="wrong-list" class="wrong-list"></div>
+      <div class="result-actions">
+        <button id="btn-retry-wrong" class="primary-btn hidden">틀린 문제 다시 풀기</button>
+        <button id="btn-restart" class="secondary-btn">같은 모드로 처음부터</button>
+        <button id="btn-home" class="secondary-btn">처음 화면으로</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
