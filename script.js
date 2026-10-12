@@ -1,4 +1,4 @@
-// NCT 퀴즈 - 시작(카테고리) → 모드 선택 → 문항 → 결과
+// 상식 퀴즈 - 시작(카테고리) → 모드 선택 → 문항 → 결과
 // 구현 1단계: 연습 모드와 점수 / 구현 2단계: 모드 선택, 스피드, 힌트, 틀린 문제 다시 풀기
 
 const QUESTIONS_PER_ROUND = 10;
@@ -77,9 +77,7 @@ function renderCategories() {
   CATEGORIES.forEach((c) => {
     const btn = document.createElement("button");
     btn.className = "category-btn";
-    const label = document.createElement("span");
-    label.textContent = c.name.replace(" ", "\n"); // 별 안에 들어가도록 두 줄로
-    btn.appendChild(label);
+    btn.textContent = c.name;
     btn.addEventListener("click", () => {
       state.category = c.id;
       $("mode-category").textContent = c.name;
@@ -210,9 +208,9 @@ function choose(chosen) {
 
   let title;
   if (timeout) title = "⏰ 시간 초과";
-  else if (!correct) title = "X 오답";
-  else if (state.isRetry) title = "O 정답";
-  else title = state.usedHint ? `O 정답 (힌트 ${HINT_SCORE}점)` : "O 정답 (1점)";
+  else if (!correct) title = "❌ 오답";
+  else if (state.isRetry) title = "⭕ 정답";
+  else title = state.usedHint ? `⭕ 정답 (힌트 ${HINT_SCORE}점)` : "⭕ 정답 (1점)";
 
   const fb = $("feedback");
   fb.innerHTML = "";
@@ -256,10 +254,14 @@ function showResult() {
   $("result-label").textContent =
     `${categoryName(state.category)} · ${MODES[state.mode].name}${state.isRetry ? " · 다시 풀기" : ""}`;
 
-  $("result-score").textContent = `${correctCount} / ${total}`;
+  if (state.isRetry) {
+    $("result-score").textContent = `${correctCount} / ${total}`;
+  } else {
+    const scoreText = state.mode === "hint" ? ` · 점수 ${formatScore(state.score)}점` : "";
+    $("result-score").textContent = `${correctCount} / ${total}${scoreText}`;
+  }
 
   let note = "";
-  if (!state.isRetry && state.mode === "hint") note = `점수 ${formatScore(state.score)}점`;
   if (state.isRetry) note = `다시 풀기는 채점하지 않습니다. 처음 점수 ${formatScore(state.firstScore)} / ${state.firstTotal} 그대로입니다.`;
   if (state.mode === "practice") note += (note ? " " : "") + "순위표에 기록되지 않음";
   $("result-note").textContent = note;
@@ -311,7 +313,7 @@ function runSelfTest() {
   check("정답 위치가 0~3", QUESTIONS.every((q) => Number.isInteger(q.answer) && q.answer >= 0 && q.answer <= 3));
   check("해설과 출처가 있음", QUESTIONS.every((q) => q.explanation && q.source && /^https:\/\//.test(q.source.url)));
   check("보기를 섞어도 정답이 유지됨", QUESTIONS.every((q) => { const s = shuffleChoices(q); return s.choices[s.answer] === q.choices[q.answer]; }));
-  check("한 판은 10문항", shuffle(QUESTIONS.filter((q) => q.category === CATEGORIES[0].id)).slice(0, QUESTIONS_PER_ROUND).length === 10);
+  check("한 판은 10문항", shuffle(QUESTIONS.filter((q) => q.category === "kh")).slice(0, QUESTIONS_PER_ROUND).length === 10);
   check("모드 3개(연습, 스피드, 힌트)", Object.keys(MODES).join() === "practice,speed,hint");
   check("스피드 제한 시간 15초", TIME_LIMIT === 15);
   check("오답과 시간 초과는 0점", scoreOf(false, false) === 0 && scoreOf(false, true) === 0);
