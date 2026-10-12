@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-상식 퀴즈 앱(`index.html`, `style.css`, `script.js`, `questions.js`)의 작업 규칙이다.
+NCT 퀴즈 앱(`index.html`, `style.css`, `script.js`, `questions.js`)의 작업 규칙이다.
 요구와 범위는 `PRD.md`, 구현 단계와 태스크는 `IMPL-PLAN.md`에 있다.
 
 ## 문항 작성 규칙
@@ -20,6 +20,8 @@
 
 ## 작업 규칙
 - 앱 파일은 네 개(`index.html`, `style.css`, `script.js`, `questions.js`)로 유지한다. 서버와 빌드 도구 없이 `index.html`을 열면 동작해야 한다.
+- 카테고리는 NCT 127, NCT DREAM, WayV, NCT WISH 네 그룹이다. 문항 내용은 나무위키 그룹 문서를 바탕으로 하고, 멤버 수·현재 리더처럼 시간이 지나면 바뀌는 사실은 쓰지 않는다.
+- 디자인은 어두운 배경, 네온 초록(#7FFF00), 둥근 별 모양, 도트 글꼴(`fonts/Galmuri11.woff2`, OFL)을 유지한다. 글꼴 파일은 코드 파일이 아닌 자원이다.
 - 카테고리마다 문항 수는 10개로 같게 유지한다. 문항을 늘릴 때는 모든 카테고리를 같은 수로 늘린다.
 - 화면 맨 위의 "학번 2601993 이름 한예솔" 줄은 지우거나 숨기지 않는다.
 - 단계를 마칠 때마다 `index.html?test`의 자체 점검(콘솔)이 실패 0인지 확인하고, 사람이 브라우저에서 확인한 뒤 깃허브에 올린다.
